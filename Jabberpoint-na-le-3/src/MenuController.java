@@ -45,7 +45,7 @@ public class MenuController extends MenuBar {
 	protected static final String LOADERR = "Load Error";
 	protected static final String SAVEERR = "Save Error";
 
-	//Comment check in test
+	//Comment check in test123
 	public MenuController(Frame frame, Presentation pres) {
 		parent = frame;
 		presentation = pres;
