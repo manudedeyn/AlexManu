@@ -17,7 +17,6 @@ public class ConcreteAccessorFactory extends AccessorFactory{
 	}
 	
 	public String getExtension(String fileName) {
-		
 		String[] values = fileName.split("\\.");
 		return values[values.length-1];
 	}
