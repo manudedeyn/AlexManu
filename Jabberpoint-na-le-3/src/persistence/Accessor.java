@@ -1,7 +1,6 @@
 package persistence;
 import java.io.IOException;
 
-import models.DemoPresentation;
 import models.Presentation;
 
 /**
@@ -30,7 +29,7 @@ public abstract class Accessor {
 	public Accessor() {
 	}
 	
-	abstract public void loadFile(Presentation p, String fn) throws IOException;
+	abstract public Presentation loadFile(String fn) throws IOException;
 
 	abstract public void saveFile(Presentation p, String fn) throws IOException;
 

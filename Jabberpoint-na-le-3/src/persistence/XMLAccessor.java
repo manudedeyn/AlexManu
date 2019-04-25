@@ -16,6 +16,8 @@ import models.Presentation;
 import models.Slide;
 import models.SlideItem;
 import models.TextItem;
+import models.factories.ConcretePresentationBuilder;
+import models.factories.PresentationBuilder;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -52,46 +54,58 @@ public class XMLAccessor extends Accessor {
     protected static final String PCE = "Parser Configuration Exception";
     protected static final String UNKNOWNTYPE = "Unknown Element type";
     protected static final String NFE = "Number Format Exception";
-    
-    
+	PresentationBuilder presentationBuilder;
+
+    public XMLAccessor() {
+    	this.presentationBuilder = new ConcretePresentationBuilder();
+    }
     private String getTitle(Element element, String tagName) {
     	NodeList titles = element.getElementsByTagName(tagName);
     	return titles.item(0).getTextContent();
     	
     }
 
-	public void loadFile(Presentation presentation, String filename) throws IOException {
+	public Presentation loadFile(String filename) throws IOException {
 		int slideNumber, itemNumber, max = 0, maxItems = 0;
 		try {
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();    
 			Document document = builder.parse(new File(filename)); // maak een JDOM document
 			Element doc = document.getDocumentElement();
+			
+			Presentation presentation = presentationBuilder.createPresentation();
 			presentation.setTitle(getTitle(doc, SHOWTITLE));
 
 			NodeList slides = doc.getElementsByTagName(SLIDE);
 			max = slides.getLength();
 			for (slideNumber = 0; slideNumber < max; slideNumber++) {
+				
 				Element xmlSlide = (Element) slides.item(slideNumber);
-				Slide slide = new Slide();
-				slide.setTitle(getTitle(xmlSlide, SLIDETITLE));
+				Slide slide = presentationBuilder.createSlide(getTitle(xmlSlide, SLIDETITLE));
+				
 				presentation.append(slide);
 				
 				NodeList slideItems = xmlSlide.getElementsByTagName(ITEM);
 				maxItems = slideItems.getLength();
+				
 				for (itemNumber = 0; itemNumber < maxItems; itemNumber++) {
 					Element item = (Element) slideItems.item(itemNumber);
 					loadSlideItem(slide, item);
 				}
 			}
+			
+			return presentation;
 		} 
 		catch (IOException iox) {
 			System.err.println(iox.toString());
+			return null;
 		}
 		catch (SAXException sax) {
 			System.err.println(sax.getMessage());
+			return null;
 		}
 		catch (ParserConfigurationException pcx) {
 			System.err.println(PCE);
+			return null;
 		}
 		
 	}
@@ -110,11 +124,11 @@ public class XMLAccessor extends Accessor {
 		}
 		String type = attributes.getNamedItem(KIND).getTextContent();
 		if (TEXT.equals(type)) {
-			slide.append(new TextItem(level, item.getTextContent()));
+			slide.append(presentationBuilder.createSlideItem("text", item.getTextContent(), level));
 		}
 		else {
 			if (IMAGE.equals(type)) {
-				slide.append(new BitmapItem(level, item.getTextContent()));
+				slide.append(presentationBuilder.createSlideItem("bitmap", item.getTextContent(), level));
 			}
 			else {
 				System.err.println(UNKNOWNTYPE);
