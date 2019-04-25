@@ -1,3 +1,4 @@
+package persistence;
 import java.util.Vector;
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +10,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
+
+import models.BitmapItem;
+import models.Presentation;
+import models.Slide;
+import models.SlideItem;
+import models.TextItem;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;

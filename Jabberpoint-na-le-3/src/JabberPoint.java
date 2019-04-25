@@ -1,5 +1,12 @@
 import javax.swing.JOptionPane;
 
+import models.Presentation;
+import models.Style;
+import persistence.Accessor;
+import persistence.factories.AccessorFactory;
+import persistence.factories.ConcreteAccessorFactory;
+import views.SlideViewerFrame;
+
 import java.io.IOException;
 
 /** JabberPoint Main Programma

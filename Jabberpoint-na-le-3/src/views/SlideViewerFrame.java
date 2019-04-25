@@ -1,7 +1,12 @@
+package views;
 import java.awt.Dimension;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowAdapter;
 import javax.swing.JFrame;
+
+import controllers.KeyController;
+import controllers.MenuController;
+import models.Presentation;
 
 /**
  * <p>Het applicatiewindow voor een slideviewcomponent</p>

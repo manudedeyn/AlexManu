@@ -1,4 +1,8 @@
+package controllers;
 import java.awt.event.KeyEvent;
+
+import models.Presentation;
+
 import java.awt.event.KeyAdapter;
 
 /** <p>This is the KeyController (KeyListener)</p>

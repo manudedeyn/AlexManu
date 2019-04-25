@@ -1,3 +1,7 @@
+package persistence.factories;
+
+import persistence.Accessor;
+import persistence.XMLAccessor;
 
 public class ConcreteAccessorFactory extends AccessorFactory{
 
