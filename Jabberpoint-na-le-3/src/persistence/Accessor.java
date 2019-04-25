@@ -1,4 +1,8 @@
+package persistence;
 import java.io.IOException;
+
+import models.DemoPresentation;
+import models.Presentation;
 
 /**
  * <p>Een Accessor maakt het mogelijk om gegevens voor een presentatie

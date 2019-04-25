@@ -1,3 +1,4 @@
+package controllers;
 import java.awt.MenuBar;
 import java.awt.Frame;
 import java.awt.Menu;
@@ -8,6 +9,11 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
+
+import models.Presentation;
+import persistence.Accessor;
+import persistence.XMLAccessor;
+import views.AboutBox;
 
 /** <p>De controller voor het menu</p>
  * @author Ian F. Darwin, ian@darwinsys.com, Gert Florijn, Sylvia Stuurman
