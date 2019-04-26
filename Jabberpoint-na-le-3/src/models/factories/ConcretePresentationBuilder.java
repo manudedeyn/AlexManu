@@ -8,19 +8,16 @@ import models.TextItem;
 
 public class ConcretePresentationBuilder extends PresentationBuilder{
 	
-	Presentation presentation;
 	
 	@Override
 	public Presentation createPresentation() {
-
-		presentation = new Presentation();
-		return presentation;
+	 return new Presentation();
 	}
 
 	@Override
 	public Slide createSlide(String title) {
 		Slide slide = new Slide();
-		slide.setTitle(title);
+		slide.setTitle(this.createSlideItem("text", title, 0));
 		return slide;
 	}
 
@@ -38,9 +35,5 @@ public class ConcretePresentationBuilder extends PresentationBuilder{
 		
 	}
 
-	@Override
-	public Presentation getPresentation() {
-		return presentation;
-	}
 
 }

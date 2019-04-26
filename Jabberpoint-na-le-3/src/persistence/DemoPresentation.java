@@ -52,13 +52,14 @@ public class DemoPresentation extends Accessor {
 		slide2.append(presentationBuilder.createSlideItem("text", "En dit is level 4",4));
 		presentation.append(slide2);
 
-		slide = new Slide();
-		slide.setTitle("De derde slide");
-		slide2.append(presentationBuilder.createSlideItem("text", "Om een nieuwe presentatie te openen,", 1));
-		slide2.append(presentationBuilder.createSlideItem("text", "gebruik File->Open uit het menu.", 2));
-		slide2.append(presentationBuilder.createSlideItem("text", " ", 1));
-		slide2.append(presentationBuilder.createSlideItem("text", "Dit is het einde van de presentatie.", 1));
-		slide.append(presentationBuilder.createSlideItem("bitmap", "JabberPoint.jpg", 1));
+		Slide slide3 = presentationBuilder.createSlide("JabberPoint");
+		slide3.setTitle(presentationBuilder.createSlideItem("text", "De derde slide", 0));
+		slide3.append(presentationBuilder.createSlideItem("text", "Om een nieuwe presentatie te openen,", 1));
+		slide3.append(presentationBuilder.createSlideItem("text", "Om een nieuwe presentatie te openen,", 1));
+		slide3.append(presentationBuilder.createSlideItem("text", "gebruik File->Open uit het menu.", 2));
+		slide3.append(presentationBuilder.createSlideItem("text", " ", 1));
+		slide3.append(presentationBuilder.createSlideItem("text", "Dit is het einde van de presentatie.", 1));
+		slide3.append(presentationBuilder.createSlideItem("bitmap", "JabberPoint.jpg", 1));
 		presentation.append(slide);
 		return presentation;
 	}
