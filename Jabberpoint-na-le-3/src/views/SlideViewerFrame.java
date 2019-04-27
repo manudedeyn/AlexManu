@@ -47,5 +47,6 @@ public class SlideViewerFrame extends JFrame {
 		setMenuBar(new MenuController(this, presentation));	// nog een controller toevoegen
 		setSize(new Dimension(WIDTH, HEIGHT)); // Dezelfde maten als Slide hanteert.
 		setVisible(true);
+		slideViewerComponent.update(presentation, presentation.getCurrentSlide());
 	}
 }

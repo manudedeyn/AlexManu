@@ -37,14 +37,9 @@ public class Slide {
 	}
 
 	// verander de titel van de slide
-	public void setTitle(String newTitle) {
+	public void setTitle(SlideItem titleItem) {
 		/* Creëer nu een TextItem op basis van de nieuwe titel */
-		title = new TextItem(0, newTitle);
-	}
-
-	// Maak een TextItem van String, en voeg het TextItem toe
-	public void append(int level, String message) {
-		append(new TextItem(level, message));
+		title = (TextItem) titleItem;
 	}
 
 	// geef het betreffende SlideItem

@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import models.Presentation;
 import persistence.Accessor;
 import persistence.XMLAccessor;
+import persistence.factories.AccessorFactory;
+import persistence.factories.ConcreteAccessorFactory;
 import views.AboutBox;
 
 /** <p>De controller voor het menu</p>
@@ -53,6 +55,10 @@ public class MenuController extends MenuBar {
 
 	
 	public MenuController(Frame frame, Presentation pres) {
+		
+		//Is uiteraard voorlopig tot als we onze PresentationController hebben
+		final AccessorFactory accessorFactory = new ConcreteAccessorFactory();
+		
 		parent = frame;
 		presentation = pres;
 		MenuItem menuItem;
@@ -61,9 +67,10 @@ public class MenuController extends MenuBar {
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				presentation.clear();
-				Accessor xmlAccessor = new XMLAccessor();
+				Accessor xmlAccessor = accessorFactory.createAccessor(TESTFILE);
+				 new XMLAccessor();
 				try {
-					xmlAccessor.loadFile(presentation, TESTFILE);
+					presentation = xmlAccessor.loadFile(TESTFILE);
 					presentation.setSlideNumber(0);
 				} catch (IOException exc) {
 					JOptionPane.showMessageDialog(parent, IOEX + exc, 

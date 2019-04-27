@@ -32,18 +32,19 @@ public class JabberPoint {
 	public static void main(String argv[]) {
 		
 		Style.createStyles();
-		Presentation presentation = new Presentation();	
+		Presentation presentation;
 		AccessorFactory accessorFactory = new ConcreteAccessorFactory();
 		
-		new SlideViewerFrame(JABVERSION, presentation);
 		try {
 			if (argv.length == 0) { // een demo presentatie
-				Accessor.getDemoAccessor().loadFile(presentation, "");
+				presentation = Accessor.getDemoAccessor().loadFile("");
 			} else {
 				Accessor accessor = accessorFactory.createAccessor(argv[0]);
-				accessor.loadFile(presentation, argv[0]);
+				presentation = accessor.loadFile(argv[0]);
 			}
 			presentation.setSlideNumber(0);
+			new SlideViewerFrame(JABVERSION, presentation);
+
 		} catch (IOException ex) {
 			JOptionPane.showMessageDialog(null,
 					IOERR + ex, JABERR,
