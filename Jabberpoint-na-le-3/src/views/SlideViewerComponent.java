@@ -8,8 +8,10 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 import controllers.PresentationController;
+import models.DrawBehavior;
 import models.Presentation;
 import models.Slide;
+import models.Transition;
 
 
 /** <p>SlideViewerComponent is een grafische component die Slides kan laten zien.</p>
@@ -71,6 +73,7 @@ public class SlideViewerComponent extends JComponent {
 		g.drawString("Slide " + (1 + presentationController.getPresentation().getSlideNumber()) + " of " +
 				presentationController.getPresentation().getSize(), XPOS, YPOS);
 		Rectangle area = new Rectangle(0, YPOS, getWidth(), (getHeight() - YPOS));
+		
 		presentationController.getPresentation().getCurrentSlide().draw(g, area, this);
 	}
 }

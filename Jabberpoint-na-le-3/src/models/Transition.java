@@ -29,5 +29,5 @@ public abstract class Transition {
 	
 	protected abstract NavigationBehavior getNavigationBehavior(Presentation presentation);
 	
-	protected abstract DrawBehavior getDrawBehavior();
+	public abstract DrawBehavior getDrawBehavior();
 }

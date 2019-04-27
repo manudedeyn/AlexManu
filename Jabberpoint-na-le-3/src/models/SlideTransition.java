@@ -10,7 +10,7 @@ public class SlideTransition extends Transition {
 	}
 
 	@Override
-	protected DrawBehavior getDrawBehavior() {
+	public DrawBehavior getDrawBehavior() {
 		return DrawBehaviorFactory.getInstance().createDrawBehavior(DrawBehaviors.SLIDE);
 	}
 }

@@ -10,7 +10,7 @@ public class SlideItemTransition extends Transition {
 	}
 
 	@Override
-	protected DrawBehavior getDrawBehavior() {
+	public DrawBehavior getDrawBehavior() {
 		return DrawBehaviorFactory.getInstance().createDrawBehavior(DrawBehaviors.SLIDE_ITEM);
 	}
 }
