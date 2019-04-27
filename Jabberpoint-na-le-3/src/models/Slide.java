@@ -5,6 +5,8 @@ import java.awt.image.ImageObserver;
 import java.util.Vector;
 import java.util.function.BooleanSupplier;
 
+import models.factories.TransitionFactory;
+
 /** <p>Een slide. Deze klasse heeft tekenfunctionaliteit.</p>
  * @author Ian F. Darwin, ian@darwinsys.com, Gert Florijn, Sylvia Stuurman
  * @version 1.1 2002/12/17 Gert Florijn
@@ -22,12 +24,17 @@ public class Slide {
 	/* Geen String meer maar een TextItem */
 	protected TextItem title; // de titel wordt apart bewaard
 	protected Vector<SlideItem> items; // de slide-items worden in een Vector bewaard
-	protected Transition transition; // de gewenste transitie. 
+	protected String transitionType; 
 	protected int currentSlideItemNumber = -1;
 	
 
 	public Slide() {
 		items = new Vector<SlideItem>();
+	}
+
+	public Slide(String transitionType) {
+		this();
+		this.transitionType = transitionType;
 	}
 
 	// Voeg een SlideItem toe
@@ -63,13 +70,10 @@ public class Slide {
 	}
 	
 	public Transition getTransition() {
-		return transition;
-	}
+		TransitionTypes type = transitionType == null ? TransitionTypes.UNSPECIFIED : TransitionTypes.valueOf(transitionType);
+		return TransitionFactory.getInstance().createTransition(type);
+	}	
 	
-	public void setTransition(Transition transition) {
-		this.transition = transition; 
-	}
-
 	public void draw(Graphics g, Rectangle area, ImageObserver view) {
 		float scale = getScale(area);
 	    int y = area.y;

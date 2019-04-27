@@ -1,7 +1,5 @@
 package persistence;
-import java.io.IOException;
 
-import models.BitmapItem;
 import models.Presentation;
 import models.Slide;
 import models.factories.ConcretePresentationBuilder;
@@ -28,7 +26,7 @@ public class DemoPresentation extends Accessor {
 	public Presentation loadFile(String unusedFilename) {
 		Presentation presentation = presentationBuilder.createPresentation();
 		presentation.setTitle("Demo Presentation");
-		Slide slide = presentationBuilder.createSlide("JabberPoint");
+		Slide slide = presentationBuilder.createSlide("JabberPoint", null);
 		slide.append(presentationBuilder.createSlideItem("text", "Het Java Presentatie Tool", 1));
 		slide.append(presentationBuilder.createSlideItem("text", "Copyright (c) 1996-2000: Ian Darwin", 2));
 		slide.append(presentationBuilder.createSlideItem("text", "Copyright (c) 2000-now:", 2));
@@ -42,7 +40,7 @@ public class DemoPresentation extends Accessor {
 
 
 		presentation.append(slide);
-		Slide slide2 = presentationBuilder.createSlide("Demonstratie van levels en stijlen");
+		Slide slide2 = presentationBuilder.createSlide("Demonstratie van levels en stijlen", null);
 		slide2.append(presentationBuilder.createSlideItem("text", "Level 1", 1));
 		slide2.append(presentationBuilder.createSlideItem("text", "Level 2",2));
 		slide2.append(presentationBuilder.createSlideItem("text", "Nogmaals level 1",1));
@@ -52,7 +50,7 @@ public class DemoPresentation extends Accessor {
 		slide2.append(presentationBuilder.createSlideItem("text", "En dit is level 4",4));
 		presentation.append(slide2);
 
-		Slide slide3 = presentationBuilder.createSlide("JabberPoint");
+		Slide slide3 = presentationBuilder.createSlide("JabberPoint", null);
 		slide3.setTitle(presentationBuilder.createSlideItem("text", "De derde slide", 0));
 		slide3.append(presentationBuilder.createSlideItem("text", "Om een nieuwe presentatie te openen,", 1));
 		slide3.append(presentationBuilder.createSlideItem("text", "Om een nieuwe presentatie te openen,", 1));

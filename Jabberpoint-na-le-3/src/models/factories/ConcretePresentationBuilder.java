@@ -15,8 +15,8 @@ public class ConcretePresentationBuilder extends PresentationBuilder{
 	}
 
 	@Override
-	public Slide createSlide(String title) {
-		Slide slide = new Slide();
+	public Slide createSlide(String title, String transitionType) {
+		Slide slide = new Slide(transitionType);
 		slide.setTitle(this.createSlideItem("text", title, 0));
 		return slide;
 	}

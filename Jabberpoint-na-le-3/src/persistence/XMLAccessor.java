@@ -16,11 +16,8 @@ import models.Presentation;
 import models.Slide;
 import models.SlideItem;
 import models.TextItem;
-import models.Transition;
-import models.TransitionTypes;
 import models.factories.ConcretePresentationBuilder;
 import models.factories.PresentationBuilder;
-import models.factories.TransitionFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -65,22 +62,12 @@ public class XMLAccessor extends Accessor {
     }
     
     
-    private String getTitle(Element element, String tagName) {
+    private String getElementText(Element element, String tagName) {
     	NodeList titles = element.getElementsByTagName(tagName);
     	return titles.item(0).getTextContent();    	
     }
     
-    private TransitionTypes getTransitionType(Element element) {
-    	NodeList transition = element.getElementsByTagName(TRANSITION);
-    	String value = transition.item(0).getTextContent();    	
-    	
-    	if (value == null || "".equals(value)) {
-    		return TransitionTypes.UNSPECIFIED;
-    	}
-    	else {
-    		return TransitionTypes.valueOf(value);
-    	}
-    }  
+   
 
 	public Presentation loadFile(String filename) throws IOException {
 		int slideNumber, itemNumber, max = 0, maxItems = 0;
@@ -90,15 +77,13 @@ public class XMLAccessor extends Accessor {
 			Element doc = document.getDocumentElement();
 			
 			Presentation presentation = presentationBuilder.createPresentation();
-			presentation.setTitle(getTitle(doc, SHOWTITLE));
+			presentation.setTitle(getElementText(doc, SHOWTITLE));
 
 			NodeList slides = doc.getElementsByTagName(SLIDE);
 			max = slides.getLength();
 			for (slideNumber = 0; slideNumber < max; slideNumber++) {				
 				Element xmlSlide = (Element) slides.item(slideNumber);
-				Slide slide = presentationBuilder.createSlide(getTitle(xmlSlide, SLIDETITLE));
-				Transition transition = TransitionFactory.getInstance().createTransition(getTransitionType(xmlSlide));				
-				slide.setTransition(transition);
+				Slide slide = presentationBuilder.createSlide(getElementText(xmlSlide, SLIDETITLE), getElementText(xmlSlide, TRANSITION));
 				
 				presentation.append(slide);
 				
