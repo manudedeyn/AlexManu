@@ -1,7 +1,5 @@
 package persistence;
-import java.io.IOException;
 
-import models.BitmapItem;
 import models.Presentation;
 import models.Slide;
 import models.factories.DefaultPresentationBuilder;
@@ -39,6 +37,7 @@ public class DemoPresentation extends Accessor {
 		presentationBuilder = presentationBuilder.createSlideItem("text", "Vorige slide: PgUp of up-arrow", 3);
 		presentationBuilder = presentationBuilder.createSlideItem("text", "Stoppen: q or Q", 3);
 
+
 		presentationBuilder = presentationBuilder.createSlide("Demonstratie van levels en stijlen");
 		presentationBuilder = presentationBuilder.createSlideItem("text", "Level 1", 1);
 		presentationBuilder = presentationBuilder.createSlideItem("text", "Level 2",2);
@@ -57,6 +56,7 @@ public class DemoPresentation extends Accessor {
 		presentationBuilder = presentationBuilder.createSlideItem("bitmap", "JabberPoint.jpg", 1);
 
 		return presentationBuilder.getPresentation();
+
 	}
 
 	public void saveFile(Presentation presentation, String unusedFilename) {

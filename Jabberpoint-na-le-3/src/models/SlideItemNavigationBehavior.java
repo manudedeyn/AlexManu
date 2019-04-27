@@ -6,14 +6,24 @@ public class SlideItemNavigationBehavior extends NavigationBehavior {
 	}
 
 	@Override
-	public boolean next(Presentation presentation) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean next() {
+		Slide slide = super.adaptee.getCurrentSlide();
+		
+		if (slide == null) {
+			return false;
+		}
+		
+		return slide.nextItem();
 	}
 
 	@Override
-	public boolean previous(Presentation presentation) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean previous() {
+		Slide slide = super.adaptee.getCurrentSlide();
+		
+		if (slide == null) {
+			return false;
+		}
+		
+		return slide.previousItem();
 	}
 }

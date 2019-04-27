@@ -49,6 +49,7 @@ public class XMLAccessor extends Accessor {
     protected static final String KIND = "kind";
     protected static final String TEXT = "text";
     protected static final String IMAGE = "image";
+    protected static final String TRANSITION = "transition";
     
     /** tekst van messages */
     protected static final String PCE = "Parser Configuration Exception";
@@ -59,11 +60,14 @@ public class XMLAccessor extends Accessor {
     public XMLAccessor() {
     	this.presentationBuilder = new DefaultPresentationBuilder();
     }
-    private String getTitle(Element element, String tagName) {
+    
+    
+    private String getElementText(Element element, String tagName) {
     	NodeList titles = element.getElementsByTagName(tagName);
-    	return titles.item(0).getTextContent();
-    	
+    	return titles.item(0).getTextContent();    	
     }
+    
+   
 
 	public Presentation loadFile(String filename) throws IOException {
 		int slideNumber, itemNumber, max = 0, maxItems = 0;
@@ -74,13 +78,15 @@ public class XMLAccessor extends Accessor {
 			
 			presentationBuilder = presentationBuilder.createPresentation(getTitle(doc, SHOWTITLE));
 
+
 			NodeList slides = doc.getElementsByTagName(SLIDE);
 			max = slides.getLength();
-			for (slideNumber = 0; slideNumber < max; slideNumber++) {
-				
+			for (slideNumber = 0; slideNumber < max; slideNumber++) {				
 				Element xmlSlide = (Element) slides.item(slideNumber);
+
 				presentationBuilder = presentationBuilder.createSlide(getTitle(xmlSlide, SLIDETITLE));
 								
+
 				NodeList slideItems = xmlSlide.getElementsByTagName(ITEM);
 				maxItems = slideItems.getLength();
 				
@@ -106,6 +112,13 @@ public class XMLAccessor extends Accessor {
 		}
 		
 	}
+
+    private String getTitle(Element element, String tagName) {
+    	NodeList titles = element.getElementsByTagName(tagName);
+    	return titles.item(0).getTextContent();
+    }
+    	
+
 
 	protected void loadSlideItem(Element item) {
 		int level = 1; // default

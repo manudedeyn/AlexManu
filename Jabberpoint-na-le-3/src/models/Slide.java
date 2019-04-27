@@ -3,6 +3,9 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
 import java.util.Vector;
+import java.util.function.BooleanSupplier;
+
+import models.factories.TransitionFactory;
 
 /** <p>Een slide. Deze klasse heeft tekenfunctionaliteit.</p>
  * @author Ian F. Darwin, ian@darwinsys.com, Gert Florijn, Sylvia Stuurman
@@ -17,13 +20,22 @@ import java.util.Vector;
 public class Slide {
 	public final static int WIDTH = 1200;
 	public final static int HEIGHT = 800;
+	protected final static int NO_ITEM = -1;
 	/* Geen String meer maar een TextItem */
 	protected TextItem title; // de titel wordt apart bewaard
 	protected SlideItem currentSlideItem;
 	protected Vector<SlideItem> items; // de slide-items worden in een Vector bewaard
+	protected String transitionType; 
+	protected int currentSlideItemNumber = -1;
+	
 
 	public Slide() {
 		items = new Vector<SlideItem>();
+	}
+
+	public Slide(String transitionType) {
+		this();
+		this.transitionType = transitionType;
 	}
 
 	// Voeg een SlideItem toe
@@ -77,7 +89,12 @@ public class Slide {
 	public int getSize() {
 		return items.size();
 	}
-
+	
+	public Transition getTransition() {
+		TransitionTypes type = transitionType == null ? TransitionTypes.UNSPECIFIED : TransitionTypes.valueOf(transitionType);
+		return TransitionFactory.getInstance().createTransition(type);
+	}	
+	
 	public void draw(Graphics g, Rectangle area, ImageObserver view) {
 		float scale = getScale(area);
 	    int y = area.y;
@@ -97,5 +114,34 @@ public class Slide {
 	// geef de schaal om de slide te kunnen tekenen
 	private float getScale(Rectangle area) {
 		return Math.min(((float)area.width) / ((float)WIDTH), ((float)area.height) / ((float)HEIGHT));
+	}
+
+	public boolean nextItem() {
+		if (currentSlideItemNumber + 1 < items.size()) {
+			currentSlideItemNumber++;
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public SlideItem getCurrentItem() {
+		if (currentSlideItemNumber == NO_ITEM) {
+			return null;
+		}
+		
+		return items.get(currentSlideItemNumber);
+	}
+
+	public boolean previousItem() {
+		if (items.size() == 0) {
+			return false;
+		}
+		else if (currentSlideItemNumber - 1 >= 0) {
+			currentSlideItemNumber--;
+			return true;
+		}		
+		
+		return false;		
 	}
 }
