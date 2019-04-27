@@ -16,10 +16,10 @@ import java.awt.event.KeyAdapter;
 */
 
 public class KeyController extends KeyAdapter {
-	private Presentation presentation; // Er worden commando's gegeven aan de presentatie
-
-	public KeyController(Presentation p) {
-		presentation = p;
+	NavigationController navigationController;
+	
+	public KeyController(NavigationController navigationController) {
+		this.navigationController = navigationController;
 	}
 
 	public void keyPressed(KeyEvent keyEvent) {
@@ -28,12 +28,12 @@ public class KeyController extends KeyAdapter {
 			case KeyEvent.VK_DOWN:
 			case KeyEvent.VK_ENTER:
 			case '+':
-				presentation.nextSlide();
+				navigationController.forward();
 				break;
 			case KeyEvent.VK_PAGE_UP:
 			case KeyEvent.VK_UP:
 			case '-':
-				presentation.prevSlide();
+				navigationController.backward();
 				break;
 			case 'q':
 			case 'Q':
