@@ -1,6 +1,7 @@
 package models;
 import java.util.ArrayList;
 
+import controllers.PresentationController;
 import views.SlideViewerComponent;
 
 
@@ -20,16 +21,20 @@ public class Presentation {
 	private String showTitle; // de titel van de presentatie
 	private ArrayList<Slide> showList = null; // een ArrayList met de Slides
 	private int currentSlideNumber = 0; // het slidenummer van de huidige Slide
-	private SlideViewerComponent slideViewComponent = null; // de viewcomponent voor de Slides
-
+	private PresentationController presentationController;
+	
 	public Presentation() {
-		slideViewComponent = null;
+		presentationController = null;
 		clear();
 	}
 
-	public Presentation(SlideViewerComponent slideViewerComponent) {
-		this.slideViewComponent = slideViewerComponent;
+	public Presentation(PresentationController presentationController) {
+		this.presentationController = presentationController;
 		clear();
+	}
+	
+	public void setPresentationController(PresentationController presentationController) {
+		this.presentationController = presentationController;
 	}
 
 	public int getSize() {
@@ -44,9 +49,9 @@ public class Presentation {
 		showTitle = nt;
 	}
 
-	public void setShowView(SlideViewerComponent slideViewerComponent) {
+/*	public void setShowView(SlideViewerComponent slideViewerComponent) {
 		this.slideViewComponent = slideViewerComponent;
-	}
+	}*/
 
 	// geef het nummer van de huidige slide
 	public int getSlideNumber() {
@@ -56,8 +61,8 @@ public class Presentation {
 	// verander het huidige-slide-nummer en laat het aan het window weten.
 	public void setSlideNumber(int number) {
 		currentSlideNumber = number;
-		if (slideViewComponent != null) {
-			slideViewComponent.update(this, getCurrentSlide());
+		if (presentationController != null) {
+			presentationController.updateView();
 		}
 	}
 

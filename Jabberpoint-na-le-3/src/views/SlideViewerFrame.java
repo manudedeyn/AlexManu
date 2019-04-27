@@ -29,29 +29,28 @@ public class SlideViewerFrame extends JFrame {
 	public final static int WIDTH = 1200;
 	public final static int HEIGHT = 800;
 	
-	public SlideViewerFrame(String title, Presentation presentation, String fileName) {
+	public SlideViewerFrame(String title, PresentationController presentationController, PersistenceController persistenceController) {
 		super(title);
-		SlideViewerComponent slideViewerComponent = new SlideViewerComponent(presentation, this);
-		presentation.setShowView(slideViewerComponent);
-		setupWindow(slideViewerComponent, presentation, fileName);
+		SlideViewerComponent slideViewerComponent = new SlideViewerComponent(this, null);
+		setupWindow(slideViewerComponent, presentationController, persistenceController);
 	}
 
 // De GUI opzetten
 	public void setupWindow(SlideViewerComponent 
-			slideViewerComponent, Presentation presentation, String fileName) {
+			slideViewerComponent, PresentationController presentationController, PersistenceController persistenceController) {
 		setTitle(JABTITLE);
 		addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent e) {
 					System.exit(0);
 				}
 			});
-		PresentationController navigationController = new PresentationController(presentation, slideViewerComponent);
-		PersistenceController persistenceController= new PersistenceController(fileName);
+		slideViewerComponent.setPresentationController(presentationController);
+		presentationController.setSlideViewerComponent(slideViewerComponent);
 		getContentPane().add(slideViewerComponent);
-		addKeyListener(new KeyController(navigationController)); // een controller toevoegen
-		setMenuBar(new MenuController(this, navigationController, persistenceController));	// nog een controller toevoegen
+		addKeyListener(new KeyController(presentationController)); // een controller toevoegen
+		setMenuBar(new MenuController(this, presentationController, persistenceController));	// nog een controller toevoegen
 		setSize(new Dimension(WIDTH, HEIGHT)); // Dezelfde maten als Slide hanteert.
 		setVisible(true);
-		slideViewerComponent.update(presentation, presentation.getCurrentSlide());
+		presentationController.updateView();
 	}
 }

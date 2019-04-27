@@ -12,11 +12,16 @@ public class PresentationController {
 	NavigationBehaviorFactory navigationBehaviorFactory;
 	SlideViewerComponent slideViewerComponent;
 	
-	public PresentationController(Presentation presentation, SlideViewerComponent slideViewerComponent) {
+	public PresentationController(Presentation presentation) {
 		this.presentation = presentation;
 		this.navigationBehaviorFactory = new DefaultNavigationBehaviorFactory();
+		presentation.setPresentationController(this);
+	}
+	
+	public void setSlideViewerComponent(SlideViewerComponent slideViewerComponent) {
 		this.slideViewerComponent = slideViewerComponent;
 	}
+	
 	public void forward() {
 		NavigationBehavior slideItemNavigationBehavior = navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE_ITEM, presentation);
 		if(slideItemNavigationBehavior.next() == false) {
@@ -69,6 +74,14 @@ public class PresentationController {
 	
 	public Presentation getPresentation() {
 		return this.presentation;
+	}
+	
+	public String getTitle() {
+		return presentation.getTitle();
+	}
+	
+	public void updateView() {
+		slideViewerComponent.update();
 	}
 	
 	public void exitPresentation() {

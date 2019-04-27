@@ -1,6 +1,7 @@
 package models.factories;
 
 
+import controllers.PresentationController;
 import models.BitmapItem;
 import models.Presentation;
 import models.Slide;

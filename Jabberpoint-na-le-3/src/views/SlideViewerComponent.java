@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+import controllers.PresentationController;
 import models.Presentation;
 import models.Slide;
 
@@ -23,10 +24,10 @@ import models.Slide;
 
 public class SlideViewerComponent extends JComponent {
 		
-	private Slide slide; // de huidige slide
 	private Font labelFont = null; // het font voor labels
-	private Presentation presentation = null; // de presentatie
+	//private Presentation presentation = null; // de presentatie
 	private JFrame frame = null;
+	PresentationController presentationController;
 	
 	private static final long serialVersionUID = 227L;
 	
@@ -38,40 +39,38 @@ public class SlideViewerComponent extends JComponent {
 	private static final int XPOS = 1100;
 	private static final int YPOS = 20;
 
-	public SlideViewerComponent(Presentation pres, JFrame frame) {
+	public SlideViewerComponent( JFrame frame, PresentationController presentationController) {
 		setBackground(BGCOLOR); 
-		presentation = pres;
 		labelFont = new Font(FONTNAME, FONTSTYLE, FONTHEIGHT);
+		this.presentationController = presentationController;
 		this.frame = frame;
 	}
 
 	public Dimension getPreferredSize() {
 		return new Dimension(Slide.WIDTH, Slide.HEIGHT);
 	}
-
-	public void update(Presentation presentation, Slide data) {
-		if (data == null) {
-			repaint();
-			return;
-		}
-		this.presentation = presentation;
-		this.slide = data;
+	
+	public void setPresentationController(PresentationController presentationController) {
+		this.presentationController = presentationController;
+	}
+	
+	public void update() {
 		repaint();
-		frame.setTitle(presentation.getTitle());
+		frame.setTitle(presentationController.getTitle());
 	}
 
 // teken de slide
 	public void paintComponent(Graphics g) {
 		g.setColor(BGCOLOR);
 		g.fillRect(0, 0, getSize().width, getSize().height);
-		if (presentation.getSlideNumber() < 0 || slide == null) {
+		if (presentationController.getPresentation().getSlideNumber() < 0 ) {
 			return;
 		}
 		g.setFont(labelFont);
 		g.setColor(COLOR);
-		g.drawString("Slide " + (1 + presentation.getSlideNumber()) + " of " +
-                 presentation.getSize(), XPOS, YPOS);
+		g.drawString("Slide " + (1 + presentationController.getPresentation().getSlideNumber()) + " of " +
+				presentationController.getPresentation().getSize(), XPOS, YPOS);
 		Rectangle area = new Rectangle(0, YPOS, getWidth(), (getHeight() - YPOS));
-		slide.draw(g, area, this);
+		presentationController.getPresentation().getCurrentSlide().draw(g, area, this);
 	}
 }

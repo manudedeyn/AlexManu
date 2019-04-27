@@ -1,5 +1,7 @@
 import javax.swing.JOptionPane;
 
+import controllers.PersistenceController;
+import controllers.PresentationController;
 import models.Presentation;
 import models.Style;
 import persistence.Accessor;
@@ -43,7 +45,10 @@ public class JabberPoint {
 				presentation = accessor.loadFile(argv[0]);
 			}
 			presentation.setSlideNumber(0);
-			new SlideViewerFrame(JABVERSION, presentation, argv[0]);
+			PresentationController navigationController = new PresentationController(presentation);
+			PersistenceController persistenceController= new PersistenceController(argv[0]);
+
+			new SlideViewerFrame(JABVERSION, navigationController, persistenceController);
 
 		} catch (IOException ex) {
 			JOptionPane.showMessageDialog(null,

@@ -94,13 +94,12 @@ public class Slide {
 		TransitionTypes type = transitionType == null ? TransitionTypes.UNSPECIFIED : TransitionTypes.valueOf(transitionType);
 		return TransitionFactory.getInstance().createTransition(type);
 	}	
-	
-	//moet aangepast worden om niet alle slideItems te showen
+
 	public void draw(Graphics g, Rectangle area, ImageObserver view) {
 		float scale = getScale(area);
 	    int y = area.y;
 		
-	    /* De titel hoeft niet meer apart behandeld te worden */
+	    //De titel hoeft niet meer apart behandeld te worden 
 	    SlideItem slideItem = this.title;
 	    
 	    Style style = Style.getStyle(slideItem.getLevel());
@@ -118,8 +117,7 @@ public class Slide {
 	      
 	      y += slideItem.getBoundingBox(g, view, scale, style).height;
 	    }
-	  }
-
+	  }	
 	// geef de schaal om de slide te kunnen tekenen
 	private float getScale(Rectangle area) {
 		return Math.min(((float)area.width) / ((float)WIDTH), ((float)area.height) / ((float)HEIGHT));

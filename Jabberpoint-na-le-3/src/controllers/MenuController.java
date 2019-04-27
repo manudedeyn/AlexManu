@@ -68,7 +68,6 @@ public class MenuController extends MenuBar {
 			public void actionPerformed(ActionEvent actionEvent) {
 				navigationController.clearPresentation();
 //				Accessor xmlAccessor = accessorFactory.createAccessor(TESTFILE);
-				new XMLAccessor();
 				navigationController.setPresentation(persistenceController.loadPresentation(TESTFILE));
 				navigationController.setSlideNumber(0);
 				parent.repaint();
@@ -84,7 +83,6 @@ public class MenuController extends MenuBar {
 		fileMenu.add(menuItem = mkMenuItem(SAVE));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Accessor xmlAccessor = new XMLAccessor();
 				persistenceController.savePresentation(navigationController.getPresentation(), SAVEFILE);
 			}
 		});
