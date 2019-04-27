@@ -14,7 +14,7 @@ import models.Presentation;
 import persistence.Accessor;
 import persistence.XMLAccessor;
 import persistence.factories.AccessorFactory;
-import persistence.factories.ConcreteAccessorFactory;
+import persistence.factories.DefaultAccessorFactory;
 import views.AboutBox;
 
 /** <p>De controller voor het menu</p>
@@ -29,7 +29,6 @@ import views.AboutBox;
 public class MenuController extends MenuBar {
 	
 	private Frame parent; // het frame, alleen gebruikt als ouder voor de Dialogs
-	private Presentation presentation; // Er worden commando's gegeven aan de presentatie
 	
 	private static final long serialVersionUID = 227L;
 	
@@ -54,35 +53,31 @@ public class MenuController extends MenuBar {
 	protected static final String SAVEERR = "Save Error";
 
 	
-	public MenuController(Frame frame, Presentation pres) {
+	public MenuController(Frame frame, final PresentationController navigationController, final PersistenceController persistenceController) {
 		
 		//Is uiteraard voorlopig tot als we onze PresentationController hebben
-		final AccessorFactory accessorFactory = new ConcreteAccessorFactory();
+		final AccessorFactory accessorFactory = new DefaultAccessorFactory();
+		//final NavigationController navigationController = new NavigationController();
 		
 		parent = frame;
-		presentation = pres;
+
 		MenuItem menuItem;
 		Menu fileMenu = new Menu(FILE);
 		fileMenu.add(menuItem = mkMenuItem(OPEN));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				presentation.clear();
-				Accessor xmlAccessor = accessorFactory.createAccessor(TESTFILE);
-				 new XMLAccessor();
-				try {
-					presentation = xmlAccessor.loadFile(TESTFILE);
-					presentation.setSlideNumber(0);
-				} catch (IOException exc) {
-					JOptionPane.showMessageDialog(parent, IOEX + exc, 
-         			LOADERR, JOptionPane.ERROR_MESSAGE);
-				}
+				navigationController.clearPresentation();
+//				Accessor xmlAccessor = accessorFactory.createAccessor(TESTFILE);
+				new XMLAccessor();
+				navigationController.setPresentation(persistenceController.loadPresentation(TESTFILE));
+				navigationController.setSlideNumber(0);
 				parent.repaint();
 			}
 		} );
 		fileMenu.add(menuItem = mkMenuItem(NEW));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				presentation.clear();
+				navigationController.clearPresentation();
 				parent.repaint();
 			}
 		});
@@ -90,19 +85,14 @@ public class MenuController extends MenuBar {
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Accessor xmlAccessor = new XMLAccessor();
-				try {
-					xmlAccessor.saveFile(presentation, SAVEFILE);
-				} catch (IOException exc) {
-					JOptionPane.showMessageDialog(parent, IOEX + exc, 
-							SAVEERR, JOptionPane.ERROR_MESSAGE);
-				}
+				persistenceController.savePresentation(navigationController.getPresentation(), SAVEFILE);
 			}
 		});
 		fileMenu.addSeparator();
 		fileMenu.add(menuItem = mkMenuItem(EXIT));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				presentation.exit(0);
+				navigationController.exitPresentation();
 			}
 		});
 		add(fileMenu);
@@ -110,13 +100,13 @@ public class MenuController extends MenuBar {
 		viewMenu.add(menuItem = mkMenuItem(NEXT));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				presentation.nextSlide();
+				navigationController.forward();
 			}
 		});
 		viewMenu.add(menuItem = mkMenuItem(PREV));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				presentation.prevSlide();
+				navigationController.backward();
 			}
 		});
 		viewMenu.add(menuItem = mkMenuItem(GOTO));
@@ -124,7 +114,7 @@ public class MenuController extends MenuBar {
 			public void actionPerformed(ActionEvent actionEvent) {
 				String pageNumberStr = JOptionPane.showInputDialog((Object)PAGENR);
 				int pageNumber = Integer.parseInt(pageNumberStr);
-				presentation.setSlideNumber(pageNumber - 1);
+				navigationController.setSlideNumber(pageNumber - 1);
 			}
 		});
 		add(viewMenu);

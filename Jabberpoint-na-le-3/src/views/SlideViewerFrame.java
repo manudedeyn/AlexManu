@@ -6,7 +6,10 @@ import javax.swing.JFrame;
 
 import controllers.KeyController;
 import controllers.MenuController;
+import controllers.PresentationController;
+import controllers.PersistenceController;
 import models.Presentation;
+import persistence.factories.AccessorFactory;
 
 /**
  * <p>Het applicatiewindow voor een slideviewcomponent</p>
@@ -26,25 +29,27 @@ public class SlideViewerFrame extends JFrame {
 	public final static int WIDTH = 1200;
 	public final static int HEIGHT = 800;
 	
-	public SlideViewerFrame(String title, Presentation presentation) {
+	public SlideViewerFrame(String title, Presentation presentation, String fileName) {
 		super(title);
 		SlideViewerComponent slideViewerComponent = new SlideViewerComponent(presentation, this);
 		presentation.setShowView(slideViewerComponent);
-		setupWindow(slideViewerComponent, presentation);
+		setupWindow(slideViewerComponent, presentation, fileName);
 	}
 
 // De GUI opzetten
 	public void setupWindow(SlideViewerComponent 
-			slideViewerComponent, Presentation presentation) {
+			slideViewerComponent, Presentation presentation, String fileName) {
 		setTitle(JABTITLE);
 		addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent e) {
 					System.exit(0);
 				}
 			});
+		PresentationController navigationController = new PresentationController(presentation);
+		PersistenceController persistenceController= new PersistenceController(fileName);
 		getContentPane().add(slideViewerComponent);
-		addKeyListener(new KeyController(presentation)); // een controller toevoegen
-		setMenuBar(new MenuController(this, presentation));	// nog een controller toevoegen
+		addKeyListener(new KeyController(navigationController)); // een controller toevoegen
+		setMenuBar(new MenuController(this, navigationController, persistenceController));	// nog een controller toevoegen
 		setSize(new Dimension(WIDTH, HEIGHT)); // Dezelfde maten als Slide hanteert.
 		setVisible(true);
 		slideViewerComponent.update(presentation, presentation.getCurrentSlide());

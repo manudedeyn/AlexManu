@@ -3,7 +3,7 @@ package persistence.factories;
 import persistence.Accessor;
 import persistence.XMLAccessor;
 
-public class ConcreteAccessorFactory extends AccessorFactory{
+public class DefaultAccessorFactory extends AccessorFactory{
 
 	@Override
 	public Accessor createAccessor(String fileName) {

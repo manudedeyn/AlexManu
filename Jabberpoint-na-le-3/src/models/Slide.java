@@ -19,6 +19,7 @@ public class Slide {
 	public final static int HEIGHT = 800;
 	/* Geen String meer maar een TextItem */
 	protected TextItem title; // de titel wordt apart bewaard
+	protected SlideItem currentSlideItem;
 	protected Vector<SlideItem> items; // de slide-items worden in een Vector bewaard
 
 	public Slide() {
@@ -51,7 +52,27 @@ public class Slide {
 	public Vector<SlideItem> getSlideItems() {
 		return items;
 	}
-
+	
+	public void setCurrentSlideItem(SlideItem item) {
+		this.currentSlideItem = item;
+	}
+	
+	public void nextSlideItem() {
+		if(items.indexOf(currentSlideItem) <= items.size()) {
+			this.setCurrentSlideItem(items.get(items.indexOf(currentSlideItem) + 1));
+		}
+	}
+	
+	public void prevSlideItem() {
+		if(items.indexOf(currentSlideItem) > 0) {
+			this.setCurrentSlideItem(items.get(items.indexOf(currentSlideItem) - 1));
+		}
+	}
+	
+	public SlideItem getCurrentSlideItem() {
+		return this.currentSlideItem;
+	}
+	
 	// geef de afmeting van de Slide
 	public int getSize() {
 		return items.size();
