@@ -45,7 +45,7 @@ public class SlideViewerFrame extends JFrame {
 					System.exit(0);
 				}
 			});
-		PresentationController navigationController = new PresentationController(presentation);
+		PresentationController navigationController = new PresentationController(presentation, slideViewerComponent);
 		PersistenceController persistenceController= new PersistenceController(fileName);
 		getContentPane().add(slideViewerComponent);
 		addKeyListener(new KeyController(navigationController)); // een controller toevoegen
