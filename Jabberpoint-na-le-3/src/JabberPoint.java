@@ -4,7 +4,7 @@ import models.Presentation;
 import models.Style;
 import persistence.Accessor;
 import persistence.factories.AccessorFactory;
-import persistence.factories.ConcreteAccessorFactory;
+import persistence.factories.DefaultAccessorFactory;
 import views.SlideViewerFrame;
 
 import java.io.IOException;
@@ -33,7 +33,7 @@ public class JabberPoint {
 		
 		Style.createStyles();
 		Presentation presentation;
-		AccessorFactory accessorFactory = new ConcreteAccessorFactory();
+		AccessorFactory accessorFactory = new DefaultAccessorFactory();
 		
 		try {
 			if (argv.length == 0) { // een demo presentatie

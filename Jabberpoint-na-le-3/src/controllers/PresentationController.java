@@ -2,10 +2,10 @@ package controllers;
 
 import models.Presentation;
 
-public class NavigationController {
+public class PresentationController {
 	Presentation presentation;
 	
-	public NavigationController(Presentation presentation) {
+	public PresentationController(Presentation presentation) {
 		this.presentation = presentation;
 	}
 	public void forward() {

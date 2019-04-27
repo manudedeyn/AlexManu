@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 
 import controllers.KeyController;
 import controllers.MenuController;
-import controllers.NavigationController;
+import controllers.PresentationController;
 import controllers.PersistenceController;
 import models.Presentation;
 import persistence.factories.AccessorFactory;
@@ -45,7 +45,7 @@ public class SlideViewerFrame extends JFrame {
 					System.exit(0);
 				}
 			});
-		NavigationController navigationController = new NavigationController(presentation);
+		PresentationController navigationController = new PresentationController(presentation);
 		PersistenceController persistenceController= new PersistenceController(fileName);
 		getContentPane().add(slideViewerComponent);
 		addKeyListener(new KeyController(navigationController)); // een controller toevoegen

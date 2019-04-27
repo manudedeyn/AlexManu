@@ -14,7 +14,7 @@ import models.Presentation;
 import persistence.Accessor;
 import persistence.XMLAccessor;
 import persistence.factories.AccessorFactory;
-import persistence.factories.ConcreteAccessorFactory;
+import persistence.factories.DefaultAccessorFactory;
 import views.AboutBox;
 
 /** <p>De controller voor het menu</p>
@@ -53,10 +53,10 @@ public class MenuController extends MenuBar {
 	protected static final String SAVEERR = "Save Error";
 
 	
-	public MenuController(Frame frame, final NavigationController navigationController, final PersistenceController persistenceController) {
+	public MenuController(Frame frame, final PresentationController navigationController, final PersistenceController persistenceController) {
 		
 		//Is uiteraard voorlopig tot als we onze PresentationController hebben
-		final AccessorFactory accessorFactory = new ConcreteAccessorFactory();
+		final AccessorFactory accessorFactory = new DefaultAccessorFactory();
 		//final NavigationController navigationController = new NavigationController();
 		
 		parent = frame;

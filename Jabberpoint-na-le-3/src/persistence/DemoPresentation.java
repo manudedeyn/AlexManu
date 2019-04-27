@@ -4,7 +4,7 @@ import java.io.IOException;
 import models.BitmapItem;
 import models.Presentation;
 import models.Slide;
-import models.factories.ConcretePresentationBuilder;
+import models.factories.DefaultPresentationBuilder;
 import models.factories.PresentationBuilder;
 
 /** Een ingebouwde demo-presentatie
@@ -22,7 +22,7 @@ public class DemoPresentation extends Accessor {
 	PresentationBuilder presentationBuilder;
 
     public DemoPresentation() {
-    	this.presentationBuilder = new ConcretePresentationBuilder();
+    	this.presentationBuilder = new DefaultPresentationBuilder();
     }
 	
 	public Presentation loadFile(String unusedFilename) {

@@ -6,7 +6,7 @@ import models.Slide;
 import models.SlideItem;
 import models.TextItem;
 
-public class ConcretePresentationBuilder extends PresentationBuilder{
+public class DefaultPresentationBuilder extends PresentationBuilder{
 	
 	
 	@Override

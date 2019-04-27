@@ -16,7 +16,7 @@ import models.Presentation;
 import models.Slide;
 import models.SlideItem;
 import models.TextItem;
-import models.factories.ConcretePresentationBuilder;
+import models.factories.DefaultPresentationBuilder;
 import models.factories.PresentationBuilder;
 
 import org.w3c.dom.Document;
@@ -57,7 +57,7 @@ public class XMLAccessor extends Accessor {
 	PresentationBuilder presentationBuilder;
 
     public XMLAccessor() {
-    	this.presentationBuilder = new ConcretePresentationBuilder();
+    	this.presentationBuilder = new DefaultPresentationBuilder();
     }
     private String getTitle(Element element, String tagName) {
     	NodeList titles = element.getElementsByTagName(tagName);

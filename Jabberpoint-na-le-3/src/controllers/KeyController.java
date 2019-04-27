@@ -16,9 +16,9 @@ import java.awt.event.KeyAdapter;
 */
 
 public class KeyController extends KeyAdapter {
-	NavigationController navigationController;
+	PresentationController navigationController;
 	
-	public KeyController(NavigationController navigationController) {
+	public KeyController(PresentationController navigationController) {
 		this.navigationController = navigationController;
 	}
 
