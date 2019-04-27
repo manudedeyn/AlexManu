@@ -26,42 +26,37 @@ public class DemoPresentation extends Accessor {
     }
 	
 	public Presentation loadFile(String unusedFilename) {
-		Presentation presentation = presentationBuilder.createPresentation();
-		presentation.setTitle("Demo Presentation");
-		Slide slide = presentationBuilder.createSlide("JabberPoint");
-		slide.append(presentationBuilder.createSlideItem("text", "Het Java Presentatie Tool", 1));
-		slide.append(presentationBuilder.createSlideItem("text", "Copyright (c) 1996-2000: Ian Darwin", 2));
-		slide.append(presentationBuilder.createSlideItem("text", "Copyright (c) 2000-now:", 2));
-		slide.append(presentationBuilder.createSlideItem("text", "Gert Florijn en Sylvia Stuurman", 2));
-		slide.append(presentationBuilder.createSlideItem("text", "JabberPoint aanroepen zonder bestandsnaam", 4));
-		slide.append(presentationBuilder.createSlideItem("text", "laat deze presentatie zien", 4));
-		slide.append(presentationBuilder.createSlideItem("text", "Navigeren:", 1));
-		slide.append(presentationBuilder.createSlideItem("text", "Volgende slide: PgDn of Enter", 3));
-		slide.append(presentationBuilder.createSlideItem("text", "Vorige slide: PgUp of up-arrow", 3));
-		slide.append(presentationBuilder.createSlideItem("text", "Stoppen: q or Q", 3));
+		presentationBuilder = presentationBuilder.createPresentation("Demo Presentation");
+		presentationBuilder = presentationBuilder.createSlide("JabberPoint");
+		presentationBuilder = presentationBuilder.createSlideItem("text", "Het Java Presentatie Tool", 1);
+		presentationBuilder = presentationBuilder.createSlideItem("text", "Copyright (c) 1996-2000: Ian Darwin", 2);
+		presentationBuilder = presentationBuilder.createSlideItem("text", "Copyright (c) 2000-now:", 2);
+		presentationBuilder = presentationBuilder.createSlideItem("text", "Gert Florijn en Sylvia Stuurman", 2);
+		presentationBuilder = presentationBuilder.createSlideItem("text", "JabberPoint aanroepen zonder bestandsnaam", 4);
+		presentationBuilder = presentationBuilder.createSlideItem("text", "laat deze presentatie zien", 4);
+		presentationBuilder = presentationBuilder.createSlideItem("text", "Navigeren:", 1);
+		presentationBuilder = presentationBuilder.createSlideItem("text", "Volgende slide: PgDn of Enter", 3);
+		presentationBuilder = presentationBuilder.createSlideItem("text", "Vorige slide: PgUp of up-arrow", 3);
+		presentationBuilder = presentationBuilder.createSlideItem("text", "Stoppen: q or Q", 3);
 
+		presentationBuilder = presentationBuilder.createSlide("Demonstratie van levels en stijlen");
+		presentationBuilder = presentationBuilder.createSlideItem("text", "Level 1", 1);
+		presentationBuilder = presentationBuilder.createSlideItem("text", "Level 2",2);
+		presentationBuilder = presentationBuilder.createSlideItem("text", "Nogmaals level 1",1);
+		presentationBuilder = presentationBuilder.createSlideItem("text", "Level 1 heeft stijl nummer 1",1);
+		presentationBuilder = presentationBuilder.createSlideItem("text", "Level 2 heeft stijl nummer 2",2);
+		presentationBuilder = presentationBuilder.createSlideItem("text", "Zo ziet level 3 er uit",3);
+		presentationBuilder = presentationBuilder.createSlideItem("text", "En dit is level 4",4);
 
-		presentation.append(slide);
-		Slide slide2 = presentationBuilder.createSlide("Demonstratie van levels en stijlen");
-		slide2.append(presentationBuilder.createSlideItem("text", "Level 1", 1));
-		slide2.append(presentationBuilder.createSlideItem("text", "Level 2",2));
-		slide2.append(presentationBuilder.createSlideItem("text", "Nogmaals level 1",1));
-		slide2.append(presentationBuilder.createSlideItem("text", "Level 1 heeft stijl nummer 1",1));
-		slide2.append(presentationBuilder.createSlideItem("text", "Level 2 heeft stijl nummer 2",2));
-		slide2.append(presentationBuilder.createSlideItem("text", "Zo ziet level 3 er uit",3));
-		slide2.append(presentationBuilder.createSlideItem("text", "En dit is level 4",4));
-		presentation.append(slide2);
+		presentationBuilder = presentationBuilder.createSlide("De derde slide");
+		presentationBuilder = presentationBuilder.createSlideItem("text", "Om een nieuwe presentatie te openen,", 1);
+		presentationBuilder = presentationBuilder.createSlideItem("text", "Om een nieuwe presentatie te openen,", 1);
+		presentationBuilder = presentationBuilder.createSlideItem("text", "gebruik File->Open uit het menu.", 2);
+		presentationBuilder = presentationBuilder.createSlideItem("text", " ", 1);
+		presentationBuilder = presentationBuilder.createSlideItem("text", "Dit is het einde van de presentatie.", 1);
+		presentationBuilder = presentationBuilder.createSlideItem("bitmap", "JabberPoint.jpg", 1);
 
-		Slide slide3 = presentationBuilder.createSlide("JabberPoint");
-		slide3.setTitle(presentationBuilder.createSlideItem("text", "De derde slide", 0));
-		slide3.append(presentationBuilder.createSlideItem("text", "Om een nieuwe presentatie te openen,", 1));
-		slide3.append(presentationBuilder.createSlideItem("text", "Om een nieuwe presentatie te openen,", 1));
-		slide3.append(presentationBuilder.createSlideItem("text", "gebruik File->Open uit het menu.", 2));
-		slide3.append(presentationBuilder.createSlideItem("text", " ", 1));
-		slide3.append(presentationBuilder.createSlideItem("text", "Dit is het einde van de presentatie.", 1));
-		slide3.append(presentationBuilder.createSlideItem("bitmap", "JabberPoint.jpg", 1));
-		presentation.append(slide);
-		return presentation;
+		return presentationBuilder.getPresentation();
 	}
 
 	public void saveFile(Presentation presentation, String unusedFilename) {

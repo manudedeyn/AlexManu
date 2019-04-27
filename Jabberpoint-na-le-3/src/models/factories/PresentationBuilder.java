@@ -5,9 +5,9 @@ import models.Slide;
 import models.SlideItem;
 
 public abstract class PresentationBuilder {
-	public abstract Presentation createPresentation();
-	public abstract Slide createSlide(String title);
-	public abstract SlideItem createSlideItem(String type, String text, int level);
+	public abstract PresentationBuilder createPresentation(String title);
+	public abstract PresentationBuilder createSlide(String title);
+	public abstract PresentationBuilder createSlideItem(String type, String text, int level);
 //Ik denk niet dat een PresentationBuilder effectief een presentation moet hebben moeten we dus bijwerken in het class diagram
-//	public abstract Presentation getPresentation();
+	public abstract Presentation getPresentation();
 }

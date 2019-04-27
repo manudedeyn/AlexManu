@@ -72,28 +72,25 @@ public class XMLAccessor extends Accessor {
 			Document document = builder.parse(new File(filename)); // maak een JDOM document
 			Element doc = document.getDocumentElement();
 			
-			Presentation presentation = presentationBuilder.createPresentation();
-			presentation.setTitle(getTitle(doc, SHOWTITLE));
+			presentationBuilder = presentationBuilder.createPresentation(getTitle(doc, SHOWTITLE));
 
 			NodeList slides = doc.getElementsByTagName(SLIDE);
 			max = slides.getLength();
 			for (slideNumber = 0; slideNumber < max; slideNumber++) {
 				
 				Element xmlSlide = (Element) slides.item(slideNumber);
-				Slide slide = presentationBuilder.createSlide(getTitle(xmlSlide, SLIDETITLE));
-				
-				presentation.append(slide);
-				
+				presentationBuilder = presentationBuilder.createSlide(getTitle(xmlSlide, SLIDETITLE));
+								
 				NodeList slideItems = xmlSlide.getElementsByTagName(ITEM);
 				maxItems = slideItems.getLength();
 				
 				for (itemNumber = 0; itemNumber < maxItems; itemNumber++) {
 					Element item = (Element) slideItems.item(itemNumber);
-					loadSlideItem(slide, item);
+					loadSlideItem(item);
 				}
 			}
 			
-			return presentation;
+			return presentationBuilder.getPresentation();
 		} 
 		catch (IOException iox) {
 			System.err.println(iox.toString());
@@ -110,7 +107,7 @@ public class XMLAccessor extends Accessor {
 		
 	}
 
-	protected void loadSlideItem(Slide slide, Element item) {
+	protected void loadSlideItem(Element item) {
 		int level = 1; // default
 		NamedNodeMap attributes = item.getAttributes();
 		String leveltext = attributes.getNamedItem(LEVEL).getTextContent();
@@ -124,11 +121,11 @@ public class XMLAccessor extends Accessor {
 		}
 		String type = attributes.getNamedItem(KIND).getTextContent();
 		if (TEXT.equals(type)) {
-				slide.append(presentationBuilder.createSlideItem("text", item.getTextContent(), level));
+				presentationBuilder.createSlideItem("text", item.getTextContent(), level);
 		}
 		else {
 			if (IMAGE.equals(type)) {
-				slide.append(presentationBuilder.createSlideItem("bitmap", item.getTextContent(), level));
+				presentationBuilder.createSlideItem("bitmap", item.getTextContent(), level);
 			}
 			else {
 				System.err.println(UNKNOWNTYPE);

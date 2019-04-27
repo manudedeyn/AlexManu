@@ -98,6 +98,11 @@ public class Presentation {
 	public Slide getCurrentSlide() {
 		return getSlide(currentSlideNumber);
 	}
+	
+	public ArrayList<Slide> getSlides() {
+		return showList;
+	}
+	
 
 	public void exit(int n) {
 		System.exit(n);

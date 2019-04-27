@@ -1,38 +1,45 @@
 package models.factories;
 
+
 import models.BitmapItem;
 import models.Presentation;
 import models.Slide;
-import models.SlideItem;
 import models.TextItem;
 
 public class DefaultPresentationBuilder extends PresentationBuilder{
-	
+	Presentation presentation;
 	
 	@Override
-	public Presentation createPresentation() {
-	 return new Presentation();
+	public PresentationBuilder createPresentation(String title) {
+			this.presentation = new Presentation();
+			this.presentation.setTitle(title);
+		return this;
 	}
 
 	@Override
-	public Slide createSlide(String title) {
+	public PresentationBuilder createSlide(String title) {
 		Slide slide = new Slide();
-		slide.setTitle(this.createSlideItem("text", title, 0));
-		return slide;
+		slide.setTitle(new TextItem(0, title));
+		presentation.append(slide);
+		return this;
 	}
 
 	@Override
-	public SlideItem createSlideItem(String type, String text, int level) {
-
+	public PresentationBuilder createSlideItem(String type, String text, int level) {
+		
 		switch(type) {
 		case "bitmap":
-			return new BitmapItem(level, text);
+			presentation.getSlides().get(presentation.getSlides().size()-1).append(new BitmapItem(level, text));
 		case "text":
-			return new TextItem(level, text);
-			//aangezien text items het meest standaard zijn..
-		default: return new TextItem(level, text);
+			presentation.getSlides().get(presentation.getSlides().size()-1).append(new TextItem(level, text));
 		}
+		return this;
 		
+	}
+
+	@Override
+	public Presentation getPresentation() {
+		return presentation;
 	}
 
 
