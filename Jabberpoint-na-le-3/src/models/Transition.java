@@ -5,7 +5,7 @@ public abstract class Transition {
 	
 	public boolean forward(Presentation presentation) {
 		NavigationBehavior navigation = getNavigationBehavior(presentation);
-		boolean didNavigate = navigation.next(presentation);
+		boolean didNavigate = navigation.next();
 		
 		if (didNavigate) {			
 			DrawBehavior drawing = getDrawBehavior();
@@ -17,7 +17,7 @@ public abstract class Transition {
 	
 	public boolean backward(Presentation presentation) {
 		NavigationBehavior navigation = getNavigationBehavior(presentation);
-		boolean didNavigate = navigation.previous(presentation);
+		boolean didNavigate = navigation.previous();
 		
 		if (didNavigate) {			
 			DrawBehavior drawing = getDrawBehavior();

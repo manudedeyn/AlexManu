@@ -7,7 +7,7 @@ public abstract class NavigationBehavior {
 		adaptee = presentation;
 	}
 
-	public abstract boolean next(Presentation presentation);	
+	public abstract boolean next();	
 	
-	public abstract boolean previous(Presentation presentation);
+	public abstract boolean previous();
 }

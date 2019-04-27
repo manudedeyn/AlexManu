@@ -6,18 +6,18 @@ public class SlideNavigationBehavior extends NavigationBehavior {
 	}
 
 	@Override
-	public boolean next(Presentation presentation) {
-		Slide slide = presentation.getCurrentSlide();		
-		presentation.nextSlide();
+	public boolean next() {
+		Slide slide = adaptee.getCurrentSlide();		
+		adaptee.nextSlide();
 		
-		return slide != presentation.getCurrentSlide();
+		return slide != adaptee.getCurrentSlide();
 	}
 
 	@Override
-	public boolean previous(Presentation presentation) {
-		Slide slide = presentation.getCurrentSlide();
-		presentation.prevSlide();
+	public boolean previous() {
+		Slide slide = adaptee.getCurrentSlide();
+		adaptee.prevSlide();
 		
-		return slide != presentation.getCurrentSlide();
+		return slide != adaptee.getCurrentSlide();
 	}
 }
