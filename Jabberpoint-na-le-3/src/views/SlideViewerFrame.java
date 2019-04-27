@@ -7,7 +7,9 @@ import javax.swing.JFrame;
 import controllers.KeyController;
 import controllers.MenuController;
 import controllers.NavigationController;
+import controllers.PersistenceController;
 import models.Presentation;
+import persistence.factories.AccessorFactory;
 
 /**
  * <p>Het applicatiewindow voor een slideviewcomponent</p>
@@ -27,16 +29,16 @@ public class SlideViewerFrame extends JFrame {
 	public final static int WIDTH = 1200;
 	public final static int HEIGHT = 800;
 	
-	public SlideViewerFrame(String title, Presentation presentation) {
+	public SlideViewerFrame(String title, Presentation presentation, String fileName) {
 		super(title);
 		SlideViewerComponent slideViewerComponent = new SlideViewerComponent(presentation, this);
 		presentation.setShowView(slideViewerComponent);
-		setupWindow(slideViewerComponent, presentation);
+		setupWindow(slideViewerComponent, presentation, fileName);
 	}
 
 // De GUI opzetten
 	public void setupWindow(SlideViewerComponent 
-			slideViewerComponent, Presentation presentation) {
+			slideViewerComponent, Presentation presentation, String fileName) {
 		setTitle(JABTITLE);
 		addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent e) {
@@ -44,9 +46,10 @@ public class SlideViewerFrame extends JFrame {
 				}
 			});
 		NavigationController navigationController = new NavigationController(presentation);
+		PersistenceController persistenceController= new PersistenceController(fileName);
 		getContentPane().add(slideViewerComponent);
 		addKeyListener(new KeyController(navigationController)); // een controller toevoegen
-		setMenuBar(new MenuController(this, navigationController));	// nog een controller toevoegen
+		setMenuBar(new MenuController(this, navigationController, persistenceController));	// nog een controller toevoegen
 		setSize(new Dimension(WIDTH, HEIGHT)); // Dezelfde maten als Slide hanteert.
 		setVisible(true);
 		slideViewerComponent.update(presentation, presentation.getCurrentSlide());

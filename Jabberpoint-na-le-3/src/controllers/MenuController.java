@@ -53,7 +53,7 @@ public class MenuController extends MenuBar {
 	protected static final String SAVEERR = "Save Error";
 
 	
-	public MenuController(Frame frame, final NavigationController navigationController) {
+	public MenuController(Frame frame, final NavigationController navigationController, final PersistenceController persistenceController) {
 		
 		//Is uiteraard voorlopig tot als we onze PresentationController hebben
 		final AccessorFactory accessorFactory = new ConcreteAccessorFactory();
@@ -67,15 +67,10 @@ public class MenuController extends MenuBar {
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				navigationController.clearPresentation();
-				Accessor xmlAccessor = accessorFactory.createAccessor(TESTFILE);
-				 new XMLAccessor();
-				try {
-					navigationController.setPresentation(xmlAccessor.loadFile(TESTFILE));
-					navigationController.setSlideNumber(0);
-				} catch (IOException exc) {
-					JOptionPane.showMessageDialog(parent, IOEX + exc, 
-         			LOADERR, JOptionPane.ERROR_MESSAGE);
-				}
+//				Accessor xmlAccessor = accessorFactory.createAccessor(TESTFILE);
+				new XMLAccessor();
+				navigationController.setPresentation(persistenceController.loadPresentation(TESTFILE));
+				navigationController.setSlideNumber(0);
 				parent.repaint();
 			}
 		} );
@@ -90,12 +85,7 @@ public class MenuController extends MenuBar {
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Accessor xmlAccessor = new XMLAccessor();
-				try {
-					xmlAccessor.saveFile(navigationController.getPresentation(), SAVEFILE);
-				} catch (IOException exc) {
-					JOptionPane.showMessageDialog(parent, IOEX + exc, 
-							SAVEERR, JOptionPane.ERROR_MESSAGE);
-				}
+				persistenceController.savePresentation(navigationController.getPresentation(), SAVEFILE);
 			}
 		});
 		fileMenu.addSeparator();

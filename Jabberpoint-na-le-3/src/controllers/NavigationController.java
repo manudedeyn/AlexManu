@@ -53,5 +53,4 @@ public class NavigationController {
 		this.presentation.exit(0);
 	}
 	
-	
 }
