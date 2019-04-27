@@ -5,7 +5,8 @@
 <!ELEMENT showtitle (#PCDATA)>
 <!ELEMENT presentation (showtitle,slide+)>
 <!ELEMENT title (#PCDATA)>
-<!ELEMENT slide (title, item*)>
+<!ELEMENT slide (title, item*, transition)>
 <!ELEMENT item (#PCDATA)>
 <!ATTLIST item kind CDATA #REQUIRED>
 <!ATTLIST item level CDATA #REQUIRED>
+<!ATTLIST item transition CDATA>
