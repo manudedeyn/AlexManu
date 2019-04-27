@@ -20,6 +20,7 @@ public class Slide {
 	/* Geen String meer maar een TextItem */
 	protected TextItem title; // de titel wordt apart bewaard
 	protected Vector<SlideItem> items; // de slide-items worden in een Vector bewaard
+	protected Transition transition; // de gewenste transitie. 
 
 	public Slide() {
 		items = new Vector<SlideItem>();
@@ -55,6 +56,14 @@ public class Slide {
 	// geef de afmeting van de Slide
 	public int getSize() {
 		return items.size();
+	}
+	
+	public Transition getTransition() {
+		return transition;
+	}
+	
+	public void setTransition(Transition transition) {
+		this.transition = transition; 
 	}
 
 	public void draw(Graphics g, Rectangle area, ImageObserver view) {
