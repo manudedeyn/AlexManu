@@ -17,8 +17,8 @@ public class DefaultPresentationBuilder extends PresentationBuilder{
 	}
 
 	@Override
-	public PresentationBuilder createSlide(String title) {
-		Slide slide = new Slide();
+	public PresentationBuilder createSlide(String title, String transition) {
+		Slide slide = new Slide(transition);
 		slide.setTitle(new TextItem(0, title));
 		presentation.append(slide);
 		return this;

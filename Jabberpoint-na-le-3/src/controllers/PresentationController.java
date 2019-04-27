@@ -1,35 +1,46 @@
 package controllers;
 
+import models.NavigationBehavior;
+import models.NavigationBehaviors;
 import models.Presentation;
+import models.factories.DefaultNavigationBehaviorFactory;
+import models.factories.NavigationBehaviorFactory;
 
 public class PresentationController {
 	Presentation presentation;
+	NavigationBehaviorFactory navigationBehaviorFactory;
 	
 	public PresentationController(Presentation presentation) {
 		this.presentation = presentation;
+		navigationBehaviorFactory = new DefaultNavigationBehaviorFactory();
 	}
 	public void forward() {
-		//voorlopig aangezien nieuwe feature voor slideitems nog gemaakt moet worden
-		this.nextSlide();
+		NavigationBehavior navigationBehavior = navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE, presentation);
+		navigationBehavior.next();
 	}
 	
 	public void backward() {
-		this.previousSlide();
+		NavigationBehavior navigationBehavior = navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE, presentation);
+		navigationBehavior.previous();
 	}
 	
 	public void nextSlide() {
+		navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE, presentation);
 		presentation.nextSlide();
 	}
 	
 	public void previousSlide() {
+		navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE, presentation);
 		presentation.prevSlide();
 	}
 	
 	public void nextSlideItem() {
+		navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE_ITEM, presentation);
 		presentation.getCurrentSlide().nextSlideItem();
 	}
 	
 	public void previousSlideItem() {
+		navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE_ITEM, presentation);
 		presentation.getCurrentSlide().prevSlideItem();;
 	}
 	

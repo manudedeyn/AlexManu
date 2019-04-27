@@ -9,4 +9,3 @@
 <!ELEMENT item (#PCDATA)>
 <!ATTLIST item kind CDATA #REQUIRED>
 <!ATTLIST item level CDATA #REQUIRED>
-<!ATTLIST item transition CDATA>

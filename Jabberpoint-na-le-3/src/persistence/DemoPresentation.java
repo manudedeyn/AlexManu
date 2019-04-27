@@ -25,7 +25,7 @@ public class DemoPresentation extends Accessor {
 	
 	public Presentation loadFile(String unusedFilename) {
 		presentationBuilder = presentationBuilder.createPresentation("Demo Presentation");
-		presentationBuilder = presentationBuilder.createSlide("JabberPoint");
+		presentationBuilder = presentationBuilder.createSlide("JabberPoint", "SLIDE");
 		presentationBuilder = presentationBuilder.createSlideItem("text", "Het Java Presentatie Tool", 1);
 		presentationBuilder = presentationBuilder.createSlideItem("text", "Copyright (c) 1996-2000: Ian Darwin", 2);
 		presentationBuilder = presentationBuilder.createSlideItem("text", "Copyright (c) 2000-now:", 2);
@@ -38,7 +38,7 @@ public class DemoPresentation extends Accessor {
 		presentationBuilder = presentationBuilder.createSlideItem("text", "Stoppen: q or Q", 3);
 
 
-		presentationBuilder = presentationBuilder.createSlide("Demonstratie van levels en stijlen");
+		presentationBuilder = presentationBuilder.createSlide("Demonstratie van levels en stijlen", "SLIDE");
 		presentationBuilder = presentationBuilder.createSlideItem("text", "Level 1", 1);
 		presentationBuilder = presentationBuilder.createSlideItem("text", "Level 2",2);
 		presentationBuilder = presentationBuilder.createSlideItem("text", "Nogmaals level 1",1);
@@ -47,7 +47,7 @@ public class DemoPresentation extends Accessor {
 		presentationBuilder = presentationBuilder.createSlideItem("text", "Zo ziet level 3 er uit",3);
 		presentationBuilder = presentationBuilder.createSlideItem("text", "En dit is level 4",4);
 
-		presentationBuilder = presentationBuilder.createSlide("De derde slide");
+		presentationBuilder = presentationBuilder.createSlide("De derde slide", "SLIDE");
 		presentationBuilder = presentationBuilder.createSlideItem("text", "Om een nieuwe presentatie te openen,", 1);
 		presentationBuilder = presentationBuilder.createSlideItem("text", "Om een nieuwe presentatie te openen,", 1);
 		presentationBuilder = presentationBuilder.createSlideItem("text", "gebruik File->Open uit het menu.", 2);
