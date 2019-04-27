@@ -7,7 +7,7 @@ public class SlideItemNavigationBehavior extends NavigationBehavior {
 
 	@Override
 	public boolean next(Presentation presentation) {
-		// TODO Auto-generated method stub
+		Slide slide = presentation.getCurrentSlide();
 		return false;
 	}
 

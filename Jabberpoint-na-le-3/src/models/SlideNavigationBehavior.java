@@ -7,13 +7,17 @@ public class SlideNavigationBehavior extends NavigationBehavior {
 
 	@Override
 	public boolean next(Presentation presentation) {
-		// TODO Auto-generated method stub
-		return false;
+		Slide slide = presentation.getCurrentSlide();		
+		presentation.nextSlide();
+		
+		return slide != presentation.getCurrentSlide();
 	}
 
 	@Override
 	public boolean previous(Presentation presentation) {
-		// TODO Auto-generated method stub
-		return false;
+		Slide slide = presentation.getCurrentSlide();
+		presentation.prevSlide();
+		
+		return slide != presentation.getCurrentSlide();
 	}
 }

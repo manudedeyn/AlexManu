@@ -3,6 +3,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
 import java.util.Vector;
+import java.util.function.BooleanSupplier;
 
 /** <p>Een slide. Deze klasse heeft tekenfunctionaliteit.</p>
  * @author Ian F. Darwin, ian@darwinsys.com, Gert Florijn, Sylvia Stuurman
@@ -17,10 +18,13 @@ import java.util.Vector;
 public class Slide {
 	public final static int WIDTH = 1200;
 	public final static int HEIGHT = 800;
+	protected final static int NO_ITEM = -1;
 	/* Geen String meer maar een TextItem */
 	protected TextItem title; // de titel wordt apart bewaard
 	protected Vector<SlideItem> items; // de slide-items worden in een Vector bewaard
 	protected Transition transition; // de gewenste transitie. 
+	protected int currentSlideItemNumber = -1;
+	
 
 	public Slide() {
 		items = new Vector<SlideItem>();
@@ -85,5 +89,34 @@ public class Slide {
 	// geef de schaal om de slide te kunnen tekenen
 	private float getScale(Rectangle area) {
 		return Math.min(((float)area.width) / ((float)WIDTH), ((float)area.height) / ((float)HEIGHT));
+	}
+
+	public boolean nextItem() {
+		if (currentSlideItemNumber + 1 < items.size()) {
+			currentSlideItemNumber++;
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public SlideItem getCurrentItem() {
+		if (currentSlideItemNumber == NO_ITEM) {
+			return null;
+		}
+		
+		return items.get(currentSlideItemNumber);
+	}
+
+	public boolean previousItem() {
+		if (items.size() == 0) {
+			return false;
+		}
+		else if (currentSlideItemNumber - 1 >= 0) {
+			currentSlideItemNumber--;
+			return true;
+		}		
+		
+		return false;		
 	}
 }
