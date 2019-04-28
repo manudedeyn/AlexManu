@@ -9,7 +9,7 @@ public abstract class Transition {
 		
 		if (didNavigate) {			
 			DrawBehavior drawing = getDrawBehavior();
-			drawing.draw(presentation.getCurrentSlide());
+			//drawing.draw(presentation.getCurrentSlide());
 		}
 		
 		return didNavigate;
@@ -21,7 +21,7 @@ public abstract class Transition {
 		
 		if (didNavigate) {			
 			DrawBehavior drawing = getDrawBehavior();
-			drawing.draw(presentation.getCurrentSlide());
+			//drawing.draw(presentation.getCurrentSlide());
 		}
 		
 		return didNavigate;

@@ -1,8 +1,8 @@
 package controllers;
 
-import models.NavigationBehavior;
 import models.NavigationBehaviors;
 import models.Presentation;
+import models.Transition;
 import models.factories.DefaultNavigationBehaviorFactory;
 import models.factories.NavigationBehaviorFactory;
 import views.SlideViewerComponent;
@@ -23,41 +23,39 @@ public class PresentationController {
 	}
 	
 	public void forward() {
-		NavigationBehavior slideItemNavigationBehavior = navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE_ITEM, presentation);
-		if(slideItemNavigationBehavior.next() == false) {
-			NavigationBehavior slideNavigationBehavior = navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE, presentation);
-			slideNavigationBehavior.next();
-		};
-		slideViewerComponent.repaint();
+		Transition transition = presentation.getCurrentSlide().getTransition();
+		
+		if (!transition.forward(presentation)) {
+			nextSlide();
+		}
+		
+		slideViewerComponent.update();
 	}
 	
 	public void backward() {
-		NavigationBehavior slideItemnavigationBehavior = navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE_ITEM, presentation);
-		if(slideItemnavigationBehavior.previous() == false) {
-			NavigationBehavior slideNavigationBehavior = navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE, presentation);
-			slideNavigationBehavior.previous();
-		};
-		slideViewerComponent.repaint();
+		Transition transition = presentation.getCurrentSlide().getTransition();
+		
+		if (!transition.backward(presentation)) {
+			previousSlide();
+		}
+		
+		slideViewerComponent.update();
 	}
 	
 	public void nextSlide() {
-		navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE, presentation);
-		presentation.nextSlide();
+		navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE, presentation).next();
 	}
 	
 	public void previousSlide() {
-		navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE, presentation);
-		presentation.prevSlide();
+		navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE, presentation).previous();
 	}
 	
 	public void nextSlideItem() {
-		navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE_ITEM, presentation);
-		presentation.getCurrentSlide().nextSlideItem();
+		navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE_ITEM, presentation).next();
 	}
 	
 	public void previousSlideItem() {
-		navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE_ITEM, presentation);
-		presentation.getCurrentSlide().prevSlideItem();;
+		navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE_ITEM, presentation).previous();
 	}
 	
 	public void clearPresentation() {
@@ -86,6 +84,5 @@ public class PresentationController {
 	
 	public void exitPresentation() {
 		this.presentation.exit(0);
-	}
-	
+	}	
 }
