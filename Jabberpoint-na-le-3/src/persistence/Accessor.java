@@ -16,16 +16,10 @@ import models.Presentation;
  * @version 1.6 2014/05/16 Sylvia Stuurman
  */
 
-//This is the AbstractFactory class, but also the abstract Accessor super class ?????
-
 public abstract class Accessor {
-	//public static final String DEMO_NAME = "Demonstratie presentatie";
-	//public static final String DEFAULT_EXTENSION = ".xml";
-
 	protected Accessor() { }
 	
 	abstract public Presentation loadFile(String fn) throws IOException;
 
 	abstract public void saveFile(Presentation p, String fn) throws IOException;
-
 }

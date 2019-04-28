@@ -1,7 +1,5 @@
 package persistence.factories;
 
-import models.factories.DefaultNavigationBehaviorFactory;
-import models.factories.NavigationBehaviorFactory;
 import persistence.Accessor;
 
 //This is the AbstractFactory class
