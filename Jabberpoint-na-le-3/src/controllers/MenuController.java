@@ -54,11 +54,6 @@ public class MenuController extends MenuBar {
 
 	
 	public MenuController(Frame frame, final PresentationController navigationController, final PersistenceController persistenceController) {
-		
-		//Is uiteraard voorlopig tot als we onze PresentationController hebben
-		final AccessorFactory accessorFactory = AccessorFactory.getInstance();
-		//final NavigationController navigationController = new NavigationController();
-		
 		parent = frame;
 
 		MenuItem menuItem;
@@ -67,14 +62,14 @@ public class MenuController extends MenuBar {
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				navigationController.clearPresentation();
-//				Accessor xmlAccessor = accessorFactory.createAccessor(TESTFILE);
+				
 				try {
-				navigationController.setPresentation(persistenceController.loadPresentation(TESTFILE));
-				navigationController.setSlideNumber(0);
-				parent.repaint();
+					navigationController.setPresentation(persistenceController.loadPresentation(TESTFILE));
+					navigationController.setSlideNumber(0);
+					parent.repaint();
 				}
 				catch(IOException e) {
-										
+					
 				}
 			}
 		} );

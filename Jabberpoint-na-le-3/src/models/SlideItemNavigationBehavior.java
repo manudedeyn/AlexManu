@@ -40,7 +40,12 @@ public class SlideItemNavigationBehavior extends NavigationBehavior {
 			}
 		}
 		
-		return result;
+		if (start == nextLevel1Index) {
+			return false;
+		}
+		else {		
+			return result;
+		}
 	}
 
 	@Override
