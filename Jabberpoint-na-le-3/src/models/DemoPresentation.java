@@ -13,7 +13,7 @@ public class DemoPresentation {
     public static Presentation getPresentation() {
     	PresentationBuilder presentationBuilder = PresentationBuilder.getInstance();
     	
-    	presentationBuilder.createPresentation("Demo Presentation")
+    	presentationBuilder.createPresentation("Demo Presentatie")
 			.createSlide("JabberPoint", "SLIDE")
 				.createSlideItem("text", "Het Java Presentatie Tool", 1)
 				.createSlideItem("text", "Copyright (c) 1996-2000: Ian Darwin", 2)
@@ -27,7 +27,7 @@ public class DemoPresentation {
 				.createSlideItem("text", "Stoppen: q or Q", 3)
 			.createSlide("Demonstratie van levels en stijlen", "SLIDE")
 				.createSlideItem("text", "Level 1", 1)
-				.createSlideItem("text", "Level 2",2)
+				.createSlideItem("text", "Level 2", 2)
 				.createSlideItem("text", "Nogmaals level 1",1)
 				.createSlideItem("text", "Level 1 heeft stijl nummer 1",1)
 				.createSlideItem("text", "Level 2 heeft stijl nummer 2",2)

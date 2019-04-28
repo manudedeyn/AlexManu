@@ -46,7 +46,7 @@ public class JabberPoint {
 			presentation.setSlideNumber(0);
 			PresentationController navigationController = new PresentationController(presentation);
 
-			new SlideViewerFrame(JABVERSION, navigationController, persistenceController);
+			//new SlideViewerFrame(JABVERSION, navigationController, persistenceController);
 
 		} catch (IOException ex) {
 			JOptionPane.showMessageDialog(null,

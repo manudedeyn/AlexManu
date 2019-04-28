@@ -1,9 +1,8 @@
 package models;
+
 import java.util.ArrayList;
 
 import controllers.PresentationController;
-import views.SlideViewerComponent;
-
 
 /**
  * <p>Presentation houdt de slides in de presentatie bij.</p>
@@ -48,10 +47,6 @@ public class Presentation {
 	public void setTitle(String nt) {
 		showTitle = nt;
 	}
-
-/*	public void setShowView(SlideViewerComponent slideViewerComponent) {
-		this.slideViewComponent = slideViewerComponent;
-	}*/
 
 	// geef het nummer van de huidige slide
 	public int getSlideNumber() {
