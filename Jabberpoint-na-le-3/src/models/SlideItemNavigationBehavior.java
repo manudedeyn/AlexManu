@@ -74,14 +74,14 @@ public class SlideItemNavigationBehavior extends NavigationBehavior {
 		}
 		
 		for(int j = startIndex; j > previousLevel1Index; j--) {
-			result = result && slide.previousItem();
+			slide.previousItem();
 			
 			if (!result) {
 				break;
 			}
 		} 
 		
-		if (startIndex == previousLevel1Index) {
+		if (startIndex == 0) {
 			return false;
 		}
 		else {		
