@@ -71,24 +71,8 @@ public class Slide {
 	
 	public void setCurrentSlideItem(SlideItem item) {
 		this.currentSlideItem = item;
-	}
-	
-	//public void nextSlideItem() {
-	//	if(items.indexOf(currentSlideItem) <= items.size()) {
-	//		this.setCurrentSlideItem(items.get(items.indexOf(currentSlideItem) + 1));
-	//	}
-	//}
-	
-	//public void prevSlideItem() {
-	//	if(items.indexOf(currentSlideItem) > 0) {
-	//		this.setCurrentSlideItem(items.get(items.indexOf(currentSlideItem) - 1));
-	//	}
-	//}
-	
-	//public SlideItem getCurrentSlideItem() {
-//		return this.currentSlideItem;
-	//}
-	
+	}	
+
 	// geef de afmeting van de Slide
 	public int getSize() {
 		return items.size();
@@ -109,6 +93,10 @@ public class Slide {
 		return false;
 	}
 	
+	public int getCurrentSlideItemNumber() {
+		return currentSlideItemNumber;
+	}
+	
 	public SlideItem getCurrentItem() {
 		if (currentSlideItemNumber == NO_ITEM) {
 			return null;
@@ -124,7 +112,10 @@ public class Slide {
 		else if (currentSlideItemNumber - 1 >= 0) {
 			currentSlideItemNumber--;
 			return true;
-		}		
+		}	
+		else {
+			currentSlideItemNumber = -1;
+		}
 		
 		return false;		
 	}
