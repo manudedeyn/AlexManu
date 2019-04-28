@@ -27,7 +27,6 @@ import models.Transition;
 public class SlideViewerComponent extends JComponent {
 		
 	private Font labelFont = null; // het font voor labels
-	//private Presentation presentation = null; // de presentatie
 	private JFrame frame = null;
 	PresentationController presentationController;
 	

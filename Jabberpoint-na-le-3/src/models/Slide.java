@@ -59,6 +59,10 @@ public class Slide {
 	public SlideItem getSlideItem(int number) {
 		return (SlideItem)items.elementAt(number);
 	}
+	
+	public void draw(Graphics g, Rectangle area, ImageObserver view) {
+		getTransition().getDrawBehavior().draw(this, g, area, view);
+	}
 
 	// geef alle SlideItems in een Vector
 	public Vector<SlideItem> getSlideItems() {
@@ -69,21 +73,21 @@ public class Slide {
 		this.currentSlideItem = item;
 	}
 	
-	public void nextSlideItem() {
-		if(items.indexOf(currentSlideItem) <= items.size()) {
-			this.setCurrentSlideItem(items.get(items.indexOf(currentSlideItem) + 1));
-		}
-	}
+	//public void nextSlideItem() {
+	//	if(items.indexOf(currentSlideItem) <= items.size()) {
+	//		this.setCurrentSlideItem(items.get(items.indexOf(currentSlideItem) + 1));
+	//	}
+	//}
 	
-	public void prevSlideItem() {
-		if(items.indexOf(currentSlideItem) > 0) {
-			this.setCurrentSlideItem(items.get(items.indexOf(currentSlideItem) - 1));
-		}
-	}
+	//public void prevSlideItem() {
+	//	if(items.indexOf(currentSlideItem) > 0) {
+	//		this.setCurrentSlideItem(items.get(items.indexOf(currentSlideItem) - 1));
+	//	}
+	//}
 	
-	public SlideItem getCurrentSlideItem() {
-		return this.currentSlideItem;
-	}
+	//public SlideItem getCurrentSlideItem() {
+//		return this.currentSlideItem;
+	//}
 	
 	// geef de afmeting van de Slide
 	public int getSize() {
@@ -93,35 +97,8 @@ public class Slide {
 	public Transition getTransition() {
 		TransitionTypes type = transitionType == null ? TransitionTypes.UNSPECIFIED : TransitionTypes.valueOf(transitionType);
 		return TransitionFactory.getInstance().createTransition(type);
-	}	
-
-	public void draw(Graphics g, Rectangle area, ImageObserver view) {
-		float scale = getScale(area);
-	    int y = area.y;
-		
-	    //De titel hoeft niet meer apart behandeld te worden 
-	    SlideItem slideItem = this.title;
-	    
-	    Style style = Style.getStyle(slideItem.getLevel());
-	    
-	    slideItem.draw(area.x, y, scale, g, style, view);
-	    
-	    y += slideItem.getBoundingBox(g, view, scale, style).height;
-	    //Enkel slideitems laten zien waarvan de index kleiner is dan currentSlideItem
-	    for (int number=0; number<currentSlideItemNumber; number++) {
-	      slideItem = (SlideItem)getSlideItems().elementAt(number);
-	      
-	      style = Style.getStyle(slideItem.getLevel());
-	      
-	      slideItem.draw(area.x, y, scale, g, style, view);
-	      
-	      y += slideItem.getBoundingBox(g, view, scale, style).height;
-	    }
-	  }	
-	// geef de schaal om de slide te kunnen tekenen
-	private float getScale(Rectangle area) {
-		return Math.min(((float)area.width) / ((float)WIDTH), ((float)area.height) / ((float)HEIGHT));
 	}
+	
 
 	public boolean nextItem() {
 		if (currentSlideItemNumber + 1 < items.size()) {
