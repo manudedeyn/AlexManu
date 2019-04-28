@@ -2,11 +2,9 @@ import javax.swing.JOptionPane;
 
 import controllers.PersistenceController;
 import controllers.PresentationController;
+import models.DemoPresentation;
 import models.Presentation;
 import models.Style;
-import persistence.Accessor;
-import persistence.factories.AccessorFactory;
-import persistence.factories.DefaultAccessorFactory;
 import views.SlideViewerFrame;
 
 import java.io.IOException;
@@ -34,19 +32,19 @@ public class JabberPoint {
 	public static void main(String argv[]) {
 		
 		Style.createStyles();
-		Presentation presentation;
-		AccessorFactory accessorFactory = new DefaultAccessorFactory();
+		Presentation presentation = null;
+		PersistenceController persistenceController = new PersistenceController();
 		
 		try {
-			if (argv.length == 0) { // een demo presentatie
-				presentation = Accessor.getDemoAccessor().loadFile("");
-			} else {
-				Accessor accessor = accessorFactory.createAccessor(argv[0]);
-				presentation = accessor.loadFile(argv[0]);
+			if (argv.length == 0) { // Indien geen argument opgegeven toon een demo presentatie.
+				presentation = DemoPresentation.getPresentation();				
 			}
+			else {				
+				presentation = persistenceController.loadPresentation(argv[0]);
+			}
+			
 			presentation.setSlideNumber(0);
 			PresentationController navigationController = new PresentationController(presentation);
-			PersistenceController persistenceController= new PersistenceController(argv[0]);
 
 			new SlideViewerFrame(JABVERSION, navigationController, persistenceController);
 
