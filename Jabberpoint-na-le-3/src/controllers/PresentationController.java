@@ -42,7 +42,7 @@ public class PresentationController {
 		slideViewerComponent.update();
 	}
 	
-	public void nextSlide() {
+	public void nextSlide() {		
 		navigationBehaviorFactory.createNavigation(NavigationBehaviors.SLIDE, presentation).next();
 	}
 	

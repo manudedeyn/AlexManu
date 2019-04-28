@@ -11,6 +11,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 import models.Presentation;
+import models.factories.TransitionFactory;
 import persistence.Accessor;
 import persistence.XMLAccessor;
 import persistence.factories.AccessorFactory;
@@ -44,6 +45,9 @@ public class MenuController extends MenuBar {
 	protected static final String PREV = "Prev";
 	protected static final String SAVE = "Save";
 	protected static final String VIEW = "View";
+	
+	protected static final String ENABLE_TRANSITIONS = "Enable transitions";
+	protected static final String DISABLE_TRANSITIONS = "Disable transitions";
 	
 	protected static final String TESTFILE = "test.xml";
 	protected static final String SAVEFILE = "dump.xml";
@@ -94,6 +98,7 @@ public class MenuController extends MenuBar {
 			}
 		});
 		add(fileMenu);
+		
 		Menu viewMenu = new Menu(VIEW);
 		viewMenu.add(menuItem = mkMenuItem(NEXT));
 		menuItem.addActionListener(new ActionListener() {
@@ -113,6 +118,18 @@ public class MenuController extends MenuBar {
 				String pageNumberStr = JOptionPane.showInputDialog((Object)PAGENR);
 				int pageNumber = Integer.parseInt(pageNumberStr);
 				navigationController.setSlideNumber(pageNumber - 1);
+			}
+		});
+		viewMenu.add(menuItem = mkMenuItem(ENABLE_TRANSITIONS));
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				TransitionFactory.setIsEnabled(true);
+			}
+		});
+		viewMenu.add(menuItem = mkMenuItem(DISABLE_TRANSITIONS));
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				TransitionFactory.setIsEnabled(false);
 			}
 		});
 		add(viewMenu);

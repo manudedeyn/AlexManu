@@ -7,7 +7,11 @@ import models.TransitionTypes;
 
 public class DefaultTransitionFactory extends TransitionFactory {
 	@Override
-	public Transition createTransition(TransitionTypes type) {		
+	public Transition createTransition(TransitionTypes type) {	
+		if (!TransitionFactory.getIsEnabled() ) {
+			return new SlideTransition();
+		}
+		
 		switch(type) {			
 			case SLIDE: return new SlideTransition();
 			case SLIDE_ITEM: return new SlideItemTransition();			

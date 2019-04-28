@@ -5,6 +5,7 @@ import controllers.PresentationController;
 import models.DemoPresentation;
 import models.Presentation;
 import models.Style;
+import models.factories.TransitionFactory;
 import views.SlideViewerFrame;
 
 import java.io.IOException;
@@ -24,9 +25,9 @@ import java.io.IOException;
  */
 
 public class JabberPoint {
-	protected static final String IOERR = "IO Error: ";
-	protected static final String JABERR = "Jabberpoint Error ";
-	protected static final String JABVERSION = "Jabberpoint 1.6 - OU version";
+	public static final String IOERR = "IO Error: ";
+	public static final String JABERR = "Jabberpoint Error ";
+	public static final String JABVERSION = "Jabberpoint 1.6 - OU version";
 
 	/** Het Main Programma */
 	public static void main(String argv[]) {
@@ -34,6 +35,7 @@ public class JabberPoint {
 		Style.createStyles();
 		Presentation presentation = null;
 		PersistenceController persistenceController = new PersistenceController();
+		TransitionFactory.setIsEnabled(true); // Initieel transities inschakelen.
 		
 		try {
 			if (argv.length == 0) { // Indien geen argument opgegeven toon een demo presentatie.
